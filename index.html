@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/assets/style.css">
+    <title>workspace-staff-manager-sc | youssef faouzi</title>
+</head>
+<body>
+   <form action="" class="form" id="form">
+
+    <div class="worker-basic">
+        <label>First name</label>
+        <input type="text" id="fname" placeholder="first name">
+
+        <label>Last name</label>
+        <input type="text" id="lname" placeholder="last name">
+    </div>
+
+    
+    <div class="worker-role">
+        <label>Role</label>
+        <select id="role-select">
+            <option>Choose role</option>
+            <option>it guy</option>
+            <option>security</option>
+            <option>reception</option>
+            <option>cleaning</option>
+            <option>manager</option>
+            <option>nettoyage</option>
+            <option>other</option>
+        </select>
+    </div>
+
+  
+    <div class="experience-section">
+        <h3>Experience</h3>
+
+        <label>Company</label>
+        <input type="text" id="expcompany" placeholder="company">
+
+        <label>Job Title</label>
+        <input type="text" id="exprole" placeholder="what was your role">
+
+        <label>Start Date</label>
+        <input type="date" id="expfrom">
+
+        <label>End Date</label>
+        <input type="date" id="expto">
+
+        <button type="button" id="add-experience">Add Experience</button>
+    </div>
+
+    <div id="experience_card"></div>
+
+   
+    <div class="worker-contact">
+        <label>Phone</label>
+        <input type="text" id="phone" placeholder="phone">
+
+        <label>Email</label>
+        <input type="text" id="email" placeholder="email">
+    </div>
+
+    <button id="submit-form" type="submit">ADD WORKER</button>
+</form>
+
+
+<div class="container">
+
+   
+    <div class="sidebar">
+        <h1>WORKER</h1>
+        <button id="addworker">add worker</button>
+    </div>
+
+   
+    <div class="main-content">
+        <div class="rooms-wrapper">
+            <div class="room-card"><button>+</button> ROOM 1</div>
+            <div class="room-card"><button>+</button> ROOM 2</div>
+            <div class="room-card"><button>+</button> ROOM 3</div>
+            <div class="room-card"><button>+</button> ROOM 4</div>
+            <div class="room-card"><button>+</button> ROOM 5</div>
+            <div class="room-card"><button>+</button> ROOM 6</div>
+        </div>
+    </div>
+
+</div>
+
+<script src="/assets/main.js"></script>
+</body>
+</html>
