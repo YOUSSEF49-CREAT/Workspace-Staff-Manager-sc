@@ -126,7 +126,7 @@
 .sidebar button {
     padding: 10px;
     border: none;
-    background: #4a8eff;
+    background: #1f8c39;
     color: white;
     border-radius: 6px;
     font-weight: 600;
@@ -230,3 +230,53 @@
     justify-content: space-between;
      align-items: center;
  }
+.cardsmall{
+    width: 80%;
+    
+    display: flex;
+    justify-content: space-around;
+    
+    flex-direction: column;
+}
+.card{
+    margin: 4px;
+    gap: 2px;
+    background-color: #6894e0;
+    padding: 2px 20px;
+    border-radius: 12px;
+    align-items: center;
+    display: flex;
+    justify-content: space-around;
+
+}
+.cardsmall h2{
+    color: white;
+    font-size: 12px;
+    font-weight: 900;
+}
+.cardsmall p{
+   color: white;
+    font-size: 10px;
+    font-weight: 100;
+}
+.cardsmall img{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+#closeForm{
+    padding: 10px;
+    background-color: #be2f2f;
+    border: none;
+    width: 150px;
+    font-weight: 900;
+    border-radius: 6px;
+    color: #ddd9d9;
+}
+#edit-exp ,#delete-exp{
+    background-color: #bef40e;
+    border-radius: 4px;
+    border: none;
+    padding: 10px;
+    color: rgb(0, 0, 0);
+}
