@@ -219,3 +219,14 @@
     }
 }
 
+
+.exp-card {
+    background: #819dde;
+    color: white;
+    padding: 20px;
+    margin: 5px 0;
+    border-radius: 6px;
+     display: flex;
+    justify-content: space-between;
+     align-items: center;
+ }
