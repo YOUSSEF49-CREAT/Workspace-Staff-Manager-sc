@@ -280,3 +280,158 @@
     padding: 10px;
     color: rgb(0, 0, 0);
 }
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: #fff;
+    padding: 20px;
+    width: 400px;
+    border-radius: 10px;
+    animation: pop 0.2s ease;
+}
+
+#close-modal {
+    float: right;
+    cursor: pointer;
+    font-size: 22px;
+}
+
+.exp-item {
+    background: #f2f2f2;
+    padding: 8px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+@keyframes pop {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+
+/* ==== DETAIL CONTAINER ==== */
+#afihce_anfo {
+    width: 450px;
+    background: #ffffff;
+    position: fixed;
+    left: 30%;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0px 5px 25px rgba(0,0,0,0.15);
+    display: none;
+    z-index: 9999;
+    font-family: "Poppins", sans-serif;
+    animation: showDetail .35s ease;
+    box-shadow: 0 0 1000px black;
+}
+
+/* APPEARING ANIMATION */
+@keyframes showDetail {
+    from { opacity: 0; transform: translateY(-30px); }
+    to { opacity: 1; transform: translateY(-50%); }
+}
+
+/* ==== HEADER ==== */
+.afich_top {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.afich_img {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #00a8ff;
+}
+
+.afich_top_content h2 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.afich_top_content p {
+    margin: 0;
+    color: #666;
+    font-size: 14px;
+}
+
+/* CLOSE BUTTON */
+#clos_info {
+    margin-left: auto;
+    border: none;
+    background: #ff3b3b;
+    color: white;
+    padding: 7px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 13px;
+    transition: .2s;
+}
+
+#clos_info:hover {
+    background: #d62828;
+}
+
+/* ==== CONTACT INFO ==== */
+
+.afich_emaile, .afich_phone {
+    margin: 5px 0;
+    font-size: 14px;
+    color: #444;
+}
+
+.work_exp {
+    margin-top: 20px;
+    font-weight: bold;
+    font-size: 16px;
+    border-left: 4px solid #00a8ff;
+    padding-left: 7px;
+}
+
+/* ==== EXPERIENCE LIST ==== */
+
+.afich_expr {
+    background: #f4f9ff;
+    padding: 12px 15px;
+    margin-top: 10px;
+    border-radius: 10px;
+    border: 1px solid #dceaff;
+}
+
+.afich_expr h4 {
+    margin: 0 0 5px 0;
+    font-size: 15px;
+    color: #0077cc;
+}
+
+.afich_expr p {
+    margin: 0;
+    font-size: 13px;
+    color: #444;
+}
+
+/* RESPONSIVE */
+@media(max-width: 600px) {
+    #afihce_anfo {
+        width: 90%;
+        right: 50%;
+        transform: translate(50%, -50%);
+    }
+}

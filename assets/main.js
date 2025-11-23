@@ -115,6 +115,10 @@ addbtn.addEventListener('click', function(){
         `;
         let cardsmall = document.getElementById('cardsmall')
         cardsmall.appendChild(card)
+
+         card.addEventListener('click',function(){
+        afihce_anfo(obj_worker)
+        })
     
       fname.value = '';
       lname.value = ''  
@@ -123,6 +127,9 @@ addbtn.addEventListener('click', function(){
       email.value = '' 
       experience = [];
        form.style.display = 'none'
+ 
+   
+    
 })
 
 
@@ -131,4 +138,49 @@ let closeForm = document.getElementById('closeForm')
 closeForm.addEventListener('click', function(){
     form.style.display = 'none'
 })
+
+// *********************************************************ajoute******************************************************
+
+
+// *************************************************************afiche******************************************************
+
+
+let afiche_info = document.getElementById('afihce_anfo')
+function afihce_anfo(worker){
+    console.log(worker.experiences)
+     let tbale_inf = worker.experiences.map(exp => `
+            <h4>${exp.nom}</h4>
+            <p>Role: ${exp.ville}</p>
+            <p>From: ${exp.dubet} To: ${exp.finale}</p>
+    `).join('')
+
+    afiche_info.innerHTML = `
+        <div class="afich_top">
+            <img class="afich_img" src="/assets/img/user_work.webp" alt="">
+            <div class="afich_top_content">
+                <h2>${worker.fname}</h2>
+                <p>${worker.lname}</p>
+            </div>
+            <button id="clos_info">close</button>  
+        </div>
+        <p class="afich_emaile">Email: ${worker.email}</p>
+        <p class="afich_phone">Phone: ${worker.phone}</p>
+        <p class="work_exp">Work experience :</p>
+        ${tbale_inf}
+    `
+    afiche_info.style.display = 'block';
+
+    let clos_info = document.getElementById('clos_info')
+    clos_info.addEventListener('click',function(){
+           afiche_info.style.display = 'none';
+    })
+    
+
+}
+
+// *************************************************************afiche******************************************************
+
+
+
+
 
