@@ -180,7 +180,7 @@ function afihce_anfo(worker){
 
 // *************************************************************afiche******************************************************
 
-// ****************************************************deplacer sur reception**********************************************
+// ****************************************************deplacer sur reception***********************************************
 
 
 
@@ -236,6 +236,64 @@ reception_btn.addEventListener('click', function () {
 });
 
 
+// ****************************************************deplacer sur reception**********************************************
+
+// ****************************************************deplacer sur reception**********************************************
 
 
 
+let conference_btn = document.getElementById('conference_btn');
+let chamber_conference = document.getElementById('chamber_conference');
+
+
+conference_btn.addEventListener('click', function () {
+
+    afiche_info.innerHTML = '' ;
+
+    
+    let parentCard = conference_btn.parentElement;
+    let expt_role = parentCard.dataset.axceptRols.split(',');
+
+    for (let worker of arr_worker) {
+
+        if (expt_role.includes(worker.roleselect)) {
+
+            let conference = document.createElement('div');
+            conference.className = 'reception';
+
+            conference.innerHTML = `
+                <img src="/assets/img/user_work.webp" alt="">
+                <div class="card_personelle">
+                    <h3>${worker.fname}</h3>
+                    <p>${worker.roleselect}</p>
+                </div>
+                <button class="return_sidebar">X</button>
+            `;
+
+            afiche_info.appendChild(conference);
+
+           
+            conference.addEventListener('click', function (e) {
+
+                if (e.target.classList.contains("return_sidebar")) return;
+
+                chamber_conference.appendChild(conference);
+                afiche_info.style.display = 'none';
+            });
+
+         
+            let returnBtn = conference.querySelector(".return_sidebar");
+            returnBtn.addEventListener("click", function (e) {
+                e.stopPropagation();
+                conference.remove();
+                cardSmall(worker);
+            });
+        }
+    }
+
+    afiche_info.style.display = 'block';
+});
+
+// ****************************************************deplacer sur conference**********************************************
+
+// ****************************************************deplacer sur servers**********************************************
