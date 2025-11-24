@@ -350,3 +350,67 @@ servers_btn.addEventListener('click', function () {
 
     afiche_info.style.display = 'block';
 });
+
+
+
+// ****************************************************deplacer sur servers**********************************************
+
+
+// ****************************************************deplacer sur security**********************************************
+
+
+
+let security_btn = document.getElementById('security_btn');
+let chamber_security = document.getElementById('chamber_security');
+
+
+security_btn.addEventListener('click', function () {
+
+    afiche_info.innerHTML = '' ;
+
+    
+    let parentCard = security_btn.parentElement;
+    let expt_role = parentCard.dataset.axceptRols.split(',');
+
+    for (let worker of arr_worker) {
+
+        if (expt_role.includes(worker.roleselect)) {
+
+            let security = document.createElement('div');
+            security.className = 'reception';
+
+            security.innerHTML = `
+                <img src="/assets/img/user_.webp" alt="">
+                <div class="card_personelle">
+                    <h3>${worker.fname}</h3>
+                    <p>${worker.roleselect}</p>
+                </div>
+                <button class="return_sidebar">X</button>
+            `;
+
+            afiche_info.appendChild(security);
+
+           
+            security.addEventListener('click', function (e) {
+
+                if (e.target.classList.contains("return_sidebar")) return;
+
+                chamber_security.appendChild(security);
+                afiche_info.style.display = 'none';
+            });
+
+         
+            let returnBtn = security.querySelector(".return_sidebar");
+            returnBtn.addEventListener("click", function (e) {
+                e.stopPropagation();
+                security.remove();
+                cardSmall(worker);
+            });
+        }
+    }
+
+    afiche_info.style.display = 'block';
+});
+
+
+
