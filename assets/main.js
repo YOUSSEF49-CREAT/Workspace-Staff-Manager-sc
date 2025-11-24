@@ -472,4 +472,59 @@ staff_btn.addEventListener('click', function () {
     afiche_info.style.display = 'block';
 });
 
+// ****************************************************deplacer sur staff**********************************************
 
+// ****************************************************deplacer sur vault**********************************************
+
+
+let vault_btn = document.getElementById('vault_btn');
+let chamber_vault = document.getElementById('chamber_vault');
+
+
+vault_btn.addEventListener('click', function () {
+
+    afiche_info.innerHTML = '' ;
+
+    
+    let parentCard = vault_btn.parentElement;
+    let expt_role = parentCard.dataset.axceptRols.split(',');
+
+    for (let worker of arr_worker) {
+
+        if (expt_role.includes(worker.roleselect)) {
+
+            let vault = document.createElement('div');
+            vault.className = 'reception';
+
+            vault.innerHTML = `
+                <img src="/assets/img/user_.webp" alt="">
+                <div class="card_personelle">
+                    <h3>${worker.fname}</h3>
+                    <p>${worker.roleselect}</p>
+                </div>
+                <button class="return_sidebar">X</button>
+            `;
+
+            afiche_info.appendChild(vault);
+
+           
+            vault.addEventListener('click', function (e) {
+
+                if (e.target.classList.contains("return_sidebar")) return;
+
+                chamber_vault.appendChild(vault);
+                afiche_info.style.display = 'none';
+            });
+
+         
+            let returnBtn = vault.querySelector(".return_sidebar");
+            returnBtn.addEventListener("click", function (e) {
+                e.stopPropagation();
+                vault.remove();
+                cardSmall(worker);
+            });
+        }
+    }
+
+    afiche_info.style.display = 'block';
+});
