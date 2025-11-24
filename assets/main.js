@@ -107,7 +107,7 @@ addbtn.addEventListener('click', function(){
         let card = document.createElement("div");
         card.className = "card";
         card.innerHTML = `
-           <img src="" alt="">
+           <img class="afich_img" src="/assets/img/user_.webp" alt="">
             <div>
                 <h2>${obj_worker.fname}</h2>
                 <p>${obj_worker.roleselect}</p>
@@ -204,7 +204,7 @@ reception_btn.addEventListener('click', function () {
             reception.className = 'reception';
 
             reception.innerHTML = `
-                <img src="/assets/img/user_work.webp" alt="">
+                <img src="/assets/img/user_.webp" alt="">
                 <div class="card_personelle">
                     <h3>${worker.fname}</h3>
                     <p>${worker.roleselect}</p>
@@ -262,7 +262,7 @@ conference_btn.addEventListener('click', function () {
             conference.className = 'reception';
 
             conference.innerHTML = `
-                <img src="/assets/img/user_work.webp" alt="">
+                <img src="/assets/img/user_.webp" alt="">
                 <div class="card_personelle">
                     <h3>${worker.fname}</h3>
                     <p>${worker.roleselect}</p>
@@ -297,3 +297,56 @@ conference_btn.addEventListener('click', function () {
 // ****************************************************deplacer sur conference**********************************************
 
 // ****************************************************deplacer sur servers**********************************************
+
+
+let servers_btn = document.getElementById('servers_btn');
+let chamber_servers = document.getElementById('chamber_servers');
+
+
+servers_btn.addEventListener('click', function () {
+
+    afiche_info.innerHTML = '' ;
+
+    
+    let parentCard = servers_btn.parentElement;
+    let expt_role = parentCard.dataset.axceptRols.split(',');
+
+    for (let worker of arr_worker) {
+
+        if (expt_role.includes(worker.roleselect)) {
+
+            let servers = document.createElement('div');
+            servers.className = 'reception';
+
+            servers.innerHTML = `
+                <img src="/assets/img/user_.webp" alt="">
+                <div class="card_personelle">
+                    <h3>${worker.fname}</h3>
+                    <p>${worker.roleselect}</p>
+                </div>
+                <button class="return_sidebar">X</button>
+            `;
+
+            afiche_info.appendChild(servers);
+
+           
+            servers.addEventListener('click', function (e) {
+
+                if (e.target.classList.contains("return_sidebar")) return;
+
+                chamber_servers.appendChild(servers);
+                afiche_info.style.display = 'none';
+            });
+
+         
+            let returnBtn = servers.querySelector(".return_sidebar");
+            returnBtn.addEventListener("click", function (e) {
+                e.stopPropagation();
+                servers.remove();
+                cardSmall(worker);
+            });
+        }
+    }
+
+    afiche_info.style.display = 'block';
+});
