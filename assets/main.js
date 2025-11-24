@@ -5,16 +5,52 @@ let expto = document.getElementById('expto')
 
 let experiencecard = document.getElementById('experience_card')
 
+
+
 let experience = []; 
 let experiences = [] ;
 let arr_worker = [] ;
 
+// ***********************************************************localStorage***********************************************************************
+
+window.addEventListener("DOMContentLoaded", function () {
+
+    let savedWorkers = JSON.parse(localStorage.getItem("lo_worker")) || [];
+
+    arr_worker = savedWorkers;
+
+   
+    let cardsmall = document.getElementById('cardsmall');
+
+    arr_worker.forEach(worker => {
+        let card = document.createElement("div");
+        card.className = "card";
+        card.innerHTML = `
+            <img class="afich_img" src="/assets/img/user_.webp" alt="">
+            <div>
+                <h2>${worker.fname}</h2>
+                <p>${worker.roleselect}</p>
+            </div>
+        `;
+
+        cardsmall.appendChild(card);
+
+        card.addEventListener('click', () => {
+            afihce_anfo(worker);
+        });
+    });
+});
+
+
+// ***********************************************************localStorage***********************************************************************
 
 let addworker = document.getElementById('addworker')
 let form = document.getElementById('form')
 addworker.addEventListener('click',function(){
      form.style.display = 'block'
 })
+
+
 
 // *****************************************experience****************************************************** 
 
@@ -117,8 +153,10 @@ addbtn.addEventListener('click', function(){
         cardsmall.appendChild(card)
 
          card.addEventListener('click',function(){
-        afihce_anfo(obj_worker)
+            afihce_anfo(obj_worker)
         })
+
+        localStorage.setItem('lo_worker' , JSON.stringify(arr_worker))
     
       fname.value = '';
       lname.value = ''  
@@ -238,7 +276,7 @@ reception_btn.addEventListener('click', function () {
 
 // ****************************************************deplacer sur reception**********************************************
 
-// ****************************************************deplacer sur reception**********************************************
+// ****************************************************deplacer sur conference**********************************************
 
 
 
@@ -528,3 +566,4 @@ vault_btn.addEventListener('click', function () {
 
     afiche_info.style.display = 'block';
 });
+
