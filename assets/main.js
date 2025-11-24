@@ -413,4 +413,63 @@ security_btn.addEventListener('click', function () {
 });
 
 
+// ****************************************************deplacer sur security**********************************************
+
+
+// ****************************************************deplacer sur staff**********************************************
+
+
+
+let staff_btn = document.getElementById('staff_btn');
+let chamber_staff = document.getElementById('chamber_staff');
+
+
+staff_btn.addEventListener('click', function () {
+
+    afiche_info.innerHTML = '' ;
+
+    
+    let parentCard = staff_btn.parentElement;
+    let expt_role = parentCard.dataset.axceptRols.split(',');
+
+    for (let worker of arr_worker) {
+
+        if (expt_role.includes(worker.roleselect)) {
+
+            let staff = document.createElement('div');
+            staff.className = 'reception';
+
+            staff.innerHTML = `
+                <img src="/assets/img/user_.webp" alt="">
+                <div class="card_personelle">
+                    <h3>${worker.fname}</h3>
+                    <p>${worker.roleselect}</p>
+                </div>
+                <button class="return_sidebar">X</button>
+            `;
+
+            afiche_info.appendChild(staff);
+
+           
+            staff.addEventListener('click', function (e) {
+
+                if (e.target.classList.contains("return_sidebar")) return;
+
+                chamber_staff.appendChild(staff);
+                afiche_info.style.display = 'none';
+            });
+
+         
+            let returnBtn = staff.querySelector(".return_sidebar");
+            returnBtn.addEventListener("click", function (e) {
+                e.stopPropagation();
+                staff.remove();
+                cardSmall(worker);
+            });
+        }
+    }
+
+    afiche_info.style.display = 'block';
+});
+
 
