@@ -115,6 +115,7 @@
     left: 0;
     height: 100vh;
     box-sizing: border-box;
+    overflow-y: scroll;
 }
 
 .sidebar h1 {
@@ -188,7 +189,6 @@
 .room-card button:hover {
     background: #346fd6;
 }
-
 @media (max-width: 768px) {
     .sidebar {
         width: 40%;
@@ -197,25 +197,26 @@
         border-right: none;
         border-bottom: 1px solid #ccc;
         align-items: center;
+        overflow-y: scroll;
     }
 
     .main-content {
         margin-left: 0;
         width: 100%;
         padding: 15px;
-       
     }
 
     .rooms-wrapper {
-        flex-direction: column;
+        display: flex;
+        flex-direction: column; 
         gap: 15px;
-       
     }
 
     .room-card {
-        flex: 1 1 100%;
+        width: 100%;       
+        flex: none;        
         justify-content: flex-start;
-        height: 200px;
+        height: auto;     
     }
 }
 

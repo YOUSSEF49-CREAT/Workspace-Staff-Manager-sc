@@ -120,6 +120,8 @@ let lname = document.getElementById('lname')
 let phone = document.getElementById('phone')
 let email = document.getElementById('email')
 
+let cardsmall = document.getElementById('cardsmall')
+
 addbtn.addEventListener('click', function(){
 
     experiencecard.innerHTML = ''
@@ -138,25 +140,9 @@ addbtn.addEventListener('click', function(){
         experiences : [...experience] ,
     }
     arr_worker.push(obj_worker)
-   
+    renderWorkers();
 
-        let card = document.createElement("div");
-        card.className = "card";
-        card.innerHTML = `
-           <img class="afich_img" src="/assets/img/user_.webp" alt="">
-            <div>
-                <h2>${obj_worker.fname}</h2>
-                <p>${obj_worker.roleselect}</p>
-            </div>
-        `;
-        let cardsmall = document.getElementById('cardsmall')
-        cardsmall.appendChild(card)
-
-         card.addEventListener('click',function(){
-            afihce_anfo(obj_worker)
-        })
-
-        localStorage.setItem('lo_worker' , JSON.stringify(arr_worker))
+    localStorage.setItem('lo_worker' , JSON.stringify(arr_worker))
     
       fname.value = '';
       lname.value = ''  
@@ -221,7 +207,7 @@ function afihce_anfo(worker){
 // ****************************************************deplacer sur reception***********************************************
 
 
-
+const reception_members = [];
 let reception_btn = document.getElementById('reception_btn');
 let chamber_reception = document.getElementById('chamber_reception');
 
@@ -236,12 +222,12 @@ reception_btn.addEventListener('click', function () {
 
     for (let worker of arr_worker) {
 
-        if (expt_role.includes(worker.roleselect)) {
+         if (expt_role.includes(worker.roleselect) && !reception_members.includes(worker.id)) {
 
-            let reception = document.createElement('div');
-            reception.className = 'reception';
+            let servers = document.createElement('div');
+            servers.className = 'reception';
 
-            reception.innerHTML = `
+            servers.innerHTML = `
                 <img src="/assets/img/user_.webp" alt="">
                 <div class="card_personelle">
                     <h3>${worker.fname}</h3>
@@ -250,22 +236,23 @@ reception_btn.addEventListener('click', function () {
                 <button class="return_sidebar">X</button>
             `;
 
-            afiche_info.appendChild(reception);
+            afiche_info.appendChild(servers);
 
            
-            reception.addEventListener('click', function (e) {
-                if (e.target.classList.contains("return_sidebar")) return;
-
-                chamber_reception.appendChild(reception);
+            servers.addEventListener('click', function () {
+                reception_members.push(worker.id);
+                chamber_reception.appendChild(servers);
                 afiche_info.style.display = 'none';
+                renderWorkers();
             });
 
          
-            let returnBtn = reception.querySelector(".return_sidebar");
+            let returnBtn = servers.querySelector(".return_sidebar");
             returnBtn.addEventListener("click", function (e) {
                 e.stopPropagation();
-                reception.remove();
-                cardSmall(worker);
+                servers.remove();
+                reception_members.splice(reception_members.indexOf(worker.id),1);
+                renderWorkers();
             });
         }
     }
@@ -336,7 +323,7 @@ conference_btn.addEventListener('click', function () {
 
 // ****************************************************deplacer sur servers**********************************************
 
-
+const server_members = []; 
 let servers_btn = document.getElementById('servers_btn');
 let chamber_servers = document.getElementById('chamber_servers');
 
@@ -351,7 +338,7 @@ servers_btn.addEventListener('click', function () {
 
     for (let worker of arr_worker) {
 
-        if (expt_role.includes(worker.roleselect)) {
+        if (expt_role.includes(worker.roleselect) && !server_members.includes(worker.id)) {
 
             let servers = document.createElement('div');
             servers.className = 'reception';
@@ -368,12 +355,11 @@ servers_btn.addEventListener('click', function () {
             afiche_info.appendChild(servers);
 
            
-            servers.addEventListener('click', function (e) {
-
-                if (e.target.classList.contains("return_sidebar")) return;
-
+            servers.addEventListener('click', function () {
+                server_members.push(worker.id);
                 chamber_servers.appendChild(servers);
                 afiche_info.style.display = 'none';
+                renderWorkers();
             });
 
          
@@ -381,7 +367,8 @@ servers_btn.addEventListener('click', function () {
             returnBtn.addEventListener("click", function (e) {
                 e.stopPropagation();
                 servers.remove();
-                cardSmall(worker);
+                server_members.splice(server_members.indexOf(worker.id),1);
+                renderWorkers();
             });
         }
     }
@@ -531,10 +518,10 @@ vault_btn.addEventListener('click', function () {
 
         if (expt_role.includes(worker.roleselect)) {
 
-            let vault = document.createElement('div');
-            vault.className = 'reception';
+            let vaultCard = document.createElement('div');
+            vaultCard.className = 'reception';
 
-            vault.innerHTML = `
+            vaultCard.innerHTML = `
                 <img src="/assets/img/user_.webp" alt="">
                 <div class="card_personelle">
                     <h3>${worker.fname}</h3>
@@ -543,22 +530,23 @@ vault_btn.addEventListener('click', function () {
                 <button class="return_sidebar">X</button>
             `;
 
-            afiche_info.appendChild(vault);
+            afiche_info.appendChild(vaultCard);
 
            
-            vault.addEventListener('click', function (e) {
+            vaultCard.addEventListener('click', function (e) {
 
                 if (e.target.classList.contains("return_sidebar")) return;
 
-                chamber_vault.appendChild(vault);
+                chamber_vault.appendChild(vaultCard);
                 afiche_info.style.display = 'none';
+                
             });
 
          
-            let returnBtn = vault.querySelector(".return_sidebar");
+            let returnBtn = vaultCard.querySelector(".return_sidebar");
             returnBtn.addEventListener("click", function (e) {
                 e.stopPropagation();
-                vault.remove();
+                vaultCard.remove();
                 cardSmall(worker);
             });
         }
@@ -566,4 +554,33 @@ vault_btn.addEventListener('click', function () {
 
     afiche_info.style.display = 'block';
 });
+
+// *************************************************************checkrooms******************************************
+
+function renderWorkers() {
+    let cardsmall = document.getElementById('cardsmall');
+    cardsmall.innerHTML = '';
+
+    arr_worker.filter((w) => !server_members.includes(w.id) && !reception_members.includes(w.id) )
+    .forEach((worker) => {
+        const card = document.createElement("div");
+        card.className = "card";
+        card.innerHTML = `
+           <img class="afich_img" src="/assets/img/user_.webp" alt="">
+            <div>
+                <h2>${worker.fname}</h2>
+                <p>${worker.roleselect}</p>
+            </div>
+        `;
+        
+        cardsmall.appendChild(card);
+        
+        card.addEventListener('click',function(){
+            afihce_anfo(worker);
+        })
+
+        
+    });
+}
+
 
