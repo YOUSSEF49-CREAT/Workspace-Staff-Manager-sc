@@ -171,7 +171,6 @@ closeForm.addEventListener('click', function(){
 
 let afiche_info = document.getElementById('afihce_anfo')
 function afihce_anfo(worker){
-    console.log(worker.experiences)
      let tbale_inf = worker.experiences.map(exp => `
             <h4>${exp.nom}</h4>
             <p>Role: ${exp.ville}</p>
@@ -180,7 +179,7 @@ function afihce_anfo(worker){
 
     afiche_info.innerHTML = `
         <div class="afich_top">
-            <img class="afich_img" src="/assets/img/user_work.webp" alt="">
+            <img class="afich_img" src="/assets/img/user_.webp" alt="">
             <div class="afich_top_content">
                 <h2>${worker.fname}</h2>
                 <p>${worker.lname}</p>
@@ -266,7 +265,7 @@ reception_btn.addEventListener('click', function () {
 // ****************************************************deplacer sur conference**********************************************
 
 
-
+const conference_members = [];
 let conference_btn = document.getElementById('conference_btn');
 let chamber_conference = document.getElementById('chamber_conference');
 
@@ -281,12 +280,12 @@ conference_btn.addEventListener('click', function () {
 
     for (let worker of arr_worker) {
 
-        if (expt_role.includes(worker.roleselect)) {
+        if (expt_role.includes(worker.roleselect) && !conference_members.includes(worker.id)) {
 
-            let conference = document.createElement('div');
-            conference.className = 'reception';
+            let servers = document.createElement('div');
+            servers.className = 'reception';
 
-            conference.innerHTML = `
+            servers.innerHTML = `
                 <img src="/assets/img/user_.webp" alt="">
                 <div class="card_personelle">
                     <h3>${worker.fname}</h3>
@@ -295,23 +294,23 @@ conference_btn.addEventListener('click', function () {
                 <button class="return_sidebar">X</button>
             `;
 
-            afiche_info.appendChild(conference);
+            afiche_info.appendChild(servers);
 
            
-            conference.addEventListener('click', function (e) {
-
-                if (e.target.classList.contains("return_sidebar")) return;
-
-                chamber_conference.appendChild(conference);
+            servers.addEventListener('click', function () {
+                conference_members.push(worker.id);
+                chamber_conference.appendChild(servers);
                 afiche_info.style.display = 'none';
+                renderWorkers();
             });
 
          
-            let returnBtn = conference.querySelector(".return_sidebar");
+            let returnBtn = servers.querySelector(".return_sidebar");
             returnBtn.addEventListener("click", function (e) {
                 e.stopPropagation();
-                conference.remove();
-                cardSmall(worker);
+                servers.remove();
+                conference_members.splice(conference_members.indexOf(worker.id),1);
+                renderWorkers();
             });
         }
     }
@@ -384,7 +383,7 @@ servers_btn.addEventListener('click', function () {
 // ****************************************************deplacer sur security**********************************************
 
 
-
+security_members = [];
 let security_btn = document.getElementById('security_btn');
 let chamber_security = document.getElementById('chamber_security');
 
@@ -399,12 +398,12 @@ security_btn.addEventListener('click', function () {
 
     for (let worker of arr_worker) {
 
-        if (expt_role.includes(worker.roleselect)) {
+        if (expt_role.includes(worker.roleselect) && !security_members.includes(worker.id)) {
 
-            let security = document.createElement('div');
-            security.className = 'reception';
+            let servers = document.createElement('div');
+            servers.className = 'reception';
 
-            security.innerHTML = `
+            servers.innerHTML = `
                 <img src="/assets/img/user_.webp" alt="">
                 <div class="card_personelle">
                     <h3>${worker.fname}</h3>
@@ -413,23 +412,23 @@ security_btn.addEventListener('click', function () {
                 <button class="return_sidebar">X</button>
             `;
 
-            afiche_info.appendChild(security);
+            afiche_info.appendChild(servers);
 
            
-            security.addEventListener('click', function (e) {
-
-                if (e.target.classList.contains("return_sidebar")) return;
-
-                chamber_security.appendChild(security);
+            servers.addEventListener('click', function () {
+                security_members.push(worker.id);
+                chamber_security.appendChild(servers);
                 afiche_info.style.display = 'none';
+                renderWorkers();
             });
 
          
-            let returnBtn = security.querySelector(".return_sidebar");
+            let returnBtn = servers.querySelector(".return_sidebar");
             returnBtn.addEventListener("click", function (e) {
                 e.stopPropagation();
-                security.remove();
-                cardSmall(worker);
+                servers.remove();
+                security_members.splice(security_members.indexOf(worker.id),1);
+                renderWorkers();
             });
         }
     }
@@ -444,7 +443,7 @@ security_btn.addEventListener('click', function () {
 // ****************************************************deplacer sur staff**********************************************
 
 
-
+const staff_members = [];
 let staff_btn = document.getElementById('staff_btn');
 let chamber_staff = document.getElementById('chamber_staff');
 
@@ -459,12 +458,12 @@ staff_btn.addEventListener('click', function () {
 
     for (let worker of arr_worker) {
 
-        if (expt_role.includes(worker.roleselect)) {
+        if (expt_role.includes(worker.roleselect) && !staff_members.includes(worker.id)) {
 
-            let staff = document.createElement('div');
-            staff.className = 'reception';
+            let servers = document.createElement('div');
+            servers.className = 'reception';
 
-            staff.innerHTML = `
+            servers.innerHTML = `
                 <img src="/assets/img/user_.webp" alt="">
                 <div class="card_personelle">
                     <h3>${worker.fname}</h3>
@@ -473,23 +472,23 @@ staff_btn.addEventListener('click', function () {
                 <button class="return_sidebar">X</button>
             `;
 
-            afiche_info.appendChild(staff);
+            afiche_info.appendChild(servers);
 
            
-            staff.addEventListener('click', function (e) {
-
-                if (e.target.classList.contains("return_sidebar")) return;
-
-                chamber_staff.appendChild(staff);
+            servers.addEventListener('click', function () {
+                staff_members.push(worker.id);
+                chamber_staff.appendChild(servers);
                 afiche_info.style.display = 'none';
+                renderWorkers();
             });
 
          
-            let returnBtn = staff.querySelector(".return_sidebar");
+            let returnBtn = servers.querySelector(".return_sidebar");
             returnBtn.addEventListener("click", function (e) {
                 e.stopPropagation();
-                staff.remove();
-                cardSmall(worker);
+                servers.remove();
+                staff_members.splice(staff_members.indexOf(worker.id),1);
+                renderWorkers();
             });
         }
     }
@@ -501,7 +500,7 @@ staff_btn.addEventListener('click', function () {
 
 // ****************************************************deplacer sur vault**********************************************
 
-
+const vault_members = [];
 let vault_btn = document.getElementById('vault_btn');
 let chamber_vault = document.getElementById('chamber_vault');
 
@@ -514,14 +513,14 @@ vault_btn.addEventListener('click', function () {
     let parentCard = vault_btn.parentElement;
     let expt_role = parentCard.dataset.axceptRols.split(',');
 
-    for (let worker of arr_worker) {
+   for (let worker of arr_worker) {
 
-        if (expt_role.includes(worker.roleselect)) {
+        if (expt_role.includes(worker.roleselect) && !vault_members.includes(worker.id)) {
 
-            let vaultCard = document.createElement('div');
-            vaultCard.className = 'reception';
+            let servers = document.createElement('div');
+            servers.className = 'reception';
 
-            vaultCard.innerHTML = `
+            servers.innerHTML = `
                 <img src="/assets/img/user_.webp" alt="">
                 <div class="card_personelle">
                     <h3>${worker.fname}</h3>
@@ -530,24 +529,23 @@ vault_btn.addEventListener('click', function () {
                 <button class="return_sidebar">X</button>
             `;
 
-            afiche_info.appendChild(vaultCard);
+            afiche_info.appendChild(servers);
 
            
-            vaultCard.addEventListener('click', function (e) {
-
-                if (e.target.classList.contains("return_sidebar")) return;
-
-                chamber_vault.appendChild(vaultCard);
+            servers.addEventListener('click', function () {
+                vault_members.push(worker.id);
+                chamber_vault.appendChild(servers);
                 afiche_info.style.display = 'none';
-                
+                renderWorkers();
             });
 
          
-            let returnBtn = vaultCard.querySelector(".return_sidebar");
+            let returnBtn = servers.querySelector(".return_sidebar");
             returnBtn.addEventListener("click", function (e) {
                 e.stopPropagation();
-                vaultCard.remove();
-                cardSmall(worker);
+                servers.remove();
+                vault_members.splice(vault_members.indexOf(worker.id),1);
+                renderWorkers();
             });
         }
     }
@@ -561,7 +559,12 @@ function renderWorkers() {
     let cardsmall = document.getElementById('cardsmall');
     cardsmall.innerHTML = '';
 
-    arr_worker.filter((w) => !server_members.includes(w.id) && !reception_members.includes(w.id) )
+    arr_worker.filter((w) => !server_members.includes(w.id) && 
+    !reception_members.includes(w.id) &&
+     !conference_members.includes(w.id) && 
+    !security_members.includes(w.id) &&
+    !staff_members.includes(w.id) &&
+      !vault_members.includes(w.id))
     .forEach((worker) => {
         const card = document.createElement("div");
         card.className = "card";
@@ -574,7 +577,7 @@ function renderWorkers() {
         `;
         
         cardsmall.appendChild(card);
-        
+
         card.addEventListener('click',function(){
             afihce_anfo(worker);
         })
